@@ -4,7 +4,10 @@
     "builds": [{
         "src": "django_netflix/wsgi.py",
         "use": "@ardnt/vercel-python-wsgi",
-        "config": { "maxLambdaSize": "60mb" }
+        "config": { 
+            "maxLambdaSize": "60mb",
+            "runtime": "python3.9"
+     }
     }],
     "routes": [
         {
