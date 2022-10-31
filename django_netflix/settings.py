@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = '$d6%u-0b2yym)nqvd#^jxk@m@rqn8bfbhxh2*kz!tbivh9&-c0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
 
 
 # Application definition
@@ -83,6 +84,15 @@ WSGI_APPLICATION = 'django_netflix.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
+    # add supabase db
+    'default': {
+        'ENGINE': "django.db.backends.postgresql",
+        'HOST': "db.cjiqwxffdnthobnakuqs.supabase.co",
+        'NAME': "postgres",
+        'USER': "postgres",
+        'PASSWORD': "WZKzTm7uTrApiSsF",
+        'PORT': "5432",
+    }
 
 }
 
@@ -124,13 +134,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR/'static_root'
+
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = [
-    BASE_DIR/'static'
-]
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 # Auth stting
 AUTH_USER_MODEL = 'core.CustomUser'
